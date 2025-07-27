@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Kawaii To-Do!</title>
+    <!-- <link rel="stylesheet" href="landingstyle.css"> -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='landingstyle.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="landing-page-body">
+    <div class="landing-wrapper">
+        <header class="landing-header">
+            <div class="logo">
+                <h1>Kawaii To-Do List!</h1>
+            </div>
+            <nav class="auth-nav">
+                <!-- <button class="auth-button login-btn">Login</button> -->
+                 <!-- <a href="/auth" class="auth-button login-btn">Login</a> -->
+                  <button class="auth-button login-btn" onclick="window.location.href='/auth';">Login</button>
+
+            </nav>
+        </header>
+
+        <main class="landing-main-content">
+            <section class="hero-section">
+                <div class="hero-text">
+                    <h2>Organize Your Life with a Sprinkle of Cuteness! ✨</h2>
+                    <p class="hero-tagline">Your tasks, beautifully managed. Simple, intuitive, and adorably efficient.</p>
+                    <!-- <a href="index.html" class="cta-button">Get Started Now!</a> -->
+                      <a href="/auth" class="cta-button">Get Started Now!</a>
+                </div>
+                <div class="hero-image">
+                    <!-- <img src="icons/ToDoListIcon.jpg" alt="Kawaii Productivity Illustration"> -->
+                     <img src="{{ url_for('static', filename='icons/ToDoListIcon.jpg') }}" alt="Kawaii Productivity Illustration">
+                </div>
+            </section>
+
+    <section class="features-section">
+    <h3> What Makes Us Special </h3>
+
+    <div class="features-row">
+        <div class="feature-item">
+            <i class="fas fa-plus-circle feature-icon"></i>
+            <h4>Easy Task Addition</h4>
+            <p>Quickly add new tasks with a delightful click.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-clock feature-icon"></i>
+            <h4>Set Completion Times</h4>
+            <p>Keep track of deadlines with custom date and time settings.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-check-circle feature-icon"></i>
+            <h4>Mark as Complete</h4>
+            <p>Tick off tasks with satisfaction and see your progress.</p>
+        </div>
+    </div>
+
+    <div class="features-row">
+        <div class="feature-item">
+            <i class="fas fa-trash-alt feature-icon"></i>
+            <h4>Effortless Deletion</h4>
+            <p>Remove tasks you no longer need with ease.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-recycle feature-icon"></i>
+            <h4>Smart Recycle Bin</h4>
+            <p>Never lose important tasks. Recover or permanently delete them later.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-palette feature-icon"></i>
+            <h4>Kawaii & Customizable</h4>
+            <p>Enjoy a cute, brown-themed design that's easy on the eyes.</p>
+        </div>
+    </div>
+</section>
+
+        </main>
+
+        <footer class="landing-footer">
+            <p>&copy; 2025 Kawaii To-Do. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

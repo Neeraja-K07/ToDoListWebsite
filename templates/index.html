@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Kawaii To-Do List!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="todo-app-body">
+    <div class="app-wrapper">
+        <header class="app-header">
+            <div class="header-title-container">
+                <img src="{{ url_for('static', filename='icons/bear.png') }}" alt="Cute Bear" class="header-bear-img">
+                <h1>My Kawaii To-Do List!</h1>
+                <img src="{{ url_for('static', filename='icons/Honey.png') }}" alt="Cute Honey Pot" class="header-honeypot-img">
+            </div>
+        </header>
+
+        <main class="app-main">
+            <nav class="side-nav">
+                <ul>
+                    <li><button class="nav-button active" data-target="todo-list-section"><i class="fas fa-clipboard-list"></i> To-Do List</button></li>
+                    <li><button class="nav-button" data-target="calendar-section"><i class="fas fa-calendar-alt"></i> Calendar</button></li>
+                    <li><button class="nav-button" data-target="habits-section"><i class="fas fa-check-double"></i> Habits</button></li>
+                   
+                    <li><button class="nav-button" data-target="recycle-bin-section"><i class="fas fa-trash-alt"></i> Recycle Bin</button></li>
+                    <li><button class="nav-button" data-target="settings-section"><i class="fas fa-cog"></i> User Details</button></li>
+                    <li><button class="nav-button back-to-home-btn" onclick="window.location.href='/logout'"><i class="fas fa-sign-out-alt"></i>Logout</button></li>
+                </ul>
+            </nav>
+
+            <div class="app-content-area">
+                <section id="todo-list-section" class="section active">
+                    <div class="add-task-area">
+                        <input type="text" id="new-task-input" placeholder="Add a new kawaii task...">
+                        <input type="datetime-local" id="task-datetime" min="">
+
+                        <button id="add-task-button" class="add-button"><i class="fas fa-plus-circle"></i> Add Task</button>
+                    </div>
+                    <div class="task-list" id="current-tasks">
+                        <p class="empty-message">No tasks yet!📝</p>
+                    </div>
+                </section>
+
+               <section id="calendar-section" class="section">
+  <h2>Calendar</h2>
+  <div class="calendar-container" style="margin-bottom: 1rem;">
+    <input type="date" id="calendar-date" value="">
+    <input type="text" id="calendar-event-input" placeholder="Enter event...">
+    <button id="add-calendar-event" class="add-button"><i class="fas fa-plus-circle"></i> Add Event</button>
+  </div>
+  <!-- ✨ NEW calendar header -->
+  <div class="calendar-header" style="display: flex; justify-content: space-between; align-items: center; margin: 1rem 0;">
+    <button id="prev-month-btn" class="add-button">←</button>
+    <h3 id="month-year-label" style="font-family: 'Cherry Bomb One', cursive; font-size: 1.5rem;">Month YYYY</h3>
+    <button id="next-month-btn" class="add-button">→</button>
+  </div>
+  <div class="calendar-grid" id="calendar-grid"></div>
+  <div class="event-list" id="calendar-event-list">
+    <p class="empty-message">No events today yet! 🍰</p>
+
+  </div>
+</section>
+
+
+                <section id="habits-section" class="section">
+                    <h2>Habit Tracker ✨</h2>
+                    <!-- Welcome and quote section -->
+<div class="welcome-quote-container" style="margin-bottom: 1.5rem; background: #d2b48c; padding: 1rem; border-radius: 12px;">
+    <h3 style="margin-bottom: 0.5rem;font-family: 'Comic Sans MS', cursive;">Welcome, {{ username }}! </h3>
+   <blockquote style="font-style: italic; color: #f8f8f8b9; font-size: 18px;">“{{ quote }}”</blockquote>
+
+</div>
+
+                    <!-- <p class="empty-message">Track your kawaii habits here!</p> -->
+                </section>
+
+                <!-- <section id="categories-section" class="section">
+                    <h2>Task Categories 🏽🷿</h2>
+                    <p class="empty-message">Organize your tasks by category.</p>
+                </section> -->
+
+                
+                <section id="recycle-bin-section" class="section">
+    <h2>Recycle Bin 🗑️</h2>
+    <button id="clear-recycle-bin-button" class="clear-button"><i class="fas fa-trash-restore-alt"></i> Clear Recycle Bin</button>
+    <div id="recycled-tasks-container" class="task-list">
+        <p class="empty-message">Deleted tasks will appear here.</p>
+    </div>
+</section>
+
+
+
+
+                <section id="settings-section" class="section">
+                    <h2>User Details⚙️</h2>
+                    <p class="empty-message">Adjust your app settings here.</p>
+                </section>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <p>&copy; 2025 Kawaii To-Do! All rights reserved. Made with love. </p>
+        </footer>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const addTaskButton = document.getElementById('add-task-button');
+    const newTaskInput = document.getElementById('new-task-input');
+    const taskDateTimeInput = document.getElementById('task-datetime');
+    const currentTasksList = document.getElementById('current-tasks');
+    const recycleTasksList = document.getElementById('recycled-tasks-container');
+
+    const clearRecycleBinButton = document.getElementById('clear-recycle-bin-button');
+
+    clearRecycleBinButton.addEventListener('click', async () => {
+        const confirmed = confirm("Are you sure you want to permanently delete all recycled tasks?");
+        if (!confirmed) return;
+
+        const response = await fetch('/clear_recycle_bin', {
+            method: 'POST'
+        });
+
+        if (response.ok) {
+            renderRecycledTasks();
+            alert("Recycle bin cleared successfully!");
+        } else {
+            alert("Failed to clear recycle bin.");
+        }
+    });
+
+    const renderTasks = async () => {
+        const response = await fetch('/get_tasks');
+        const tasks = await response.json();
+        currentTasksList.innerHTML = '';
+
+        if (tasks.length === 0) {
+            currentTasksList.innerHTML = '<p class="empty-message">No tasks yet! Time to add some sweetness. 📝</p>';
+            return;
+        }
+
+
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', async (e) => {
+                const taskId = e.target.dataset.id;
+                const completed = e.target.checked;
+                await fetch('/complete_task', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task_id: taskId, completed })
+                });
+                renderTasks();
+            });
+        });
+
+
+
+tasks.forEach(task => {
+    const todoItem = document.createElement('div');
+    todoItem.classList.add('todo-item');
+    if (task.completed) todoItem.classList.add('completed');
+
+    const formattedTime = task.datetime ? new Date(task.datetime).toLocaleString('en-US', {
+        year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+    }) : '';
+
+    todoItem.innerHTML = `
+        <div class="task-content">
+            <input type="checkbox" class="task-checkbox" data-id="${task.id}" ${task.completed ? 'checked' : ''}>
+            <span class="task-text">${task.text}</span>
+            ${formattedTime ? `<span class="completion-time">${formattedTime}</span>` : ''}
+        </div>
+        <div class="task-actions">
+            <button class="edit-button" data-id="${task.id}" data-text="${task.text}" data-datetime="${task.datetime}"><i class="fas fa-edit"></i></button>
+            <button class="delete-button" data-id="${task.id}"><i class="fas fa-trash"></i></button>
+        </div>
+    `;
+
+    // ✅ Attach listener after the element exists
+    const checkbox = todoItem.querySelector('.task-checkbox');
+    checkbox.addEventListener('change', async (e) => {
+        const taskId = e.target.dataset.id;
+        const completed = e.target.checked;
+        await fetch('/complete_task', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ task_id: taskId, completed })
+        });
+        renderTasks();
+    });
+
+    currentTasksList.appendChild(todoItem);
+});
+
+
+// 🔧 Edit popup logic
+document.querySelectorAll('.edit-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const taskId = button.dataset.id;
+        const currentText = button.dataset.text;
+        const currentDateTime = button.dataset.datetime;
+
+        const popup = document.createElement('div');
+        popup.classList.add('edit-popup');
+        popup.innerHTML = `
+            <div class="popup-content">
+                <h3>Edit Task</h3>
+                <input type="text" id="edit-task-text" value="${currentText}">
+                <input type="datetime-local" id="edit-task-datetime" value="${currentDateTime?.slice(0, 16) || ''}">
+                <button id="save-edit-btn">Save</button>
+                <button id="cancel-edit-btn">Cancel</button>
+            </div>
+        `;
+
+        document.body.appendChild(popup);
+
+
+        
+
+        document.getElementById('save-edit-btn').addEventListener('click', async () => {
+            const newText = document.getElementById('edit-task-text').value.trim();
+            const newDateTime = document.getElementById('edit-task-datetime').value;
+
+            if (!newText || !newDateTime) return;
+
+            const response = await fetch('/update_task', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ task_id: taskId, new_text: newText, new_datetime: newDateTime })
+            });
+
+            if (response.ok) {
+                popup.remove();
+                renderTasks();
+            } else {
+                alert('Failed to update task.');
+            }
+        });
+
+        document.getElementById('cancel-edit-btn').addEventListener('click', () => popup.remove());
+    });
+});
+
+
+
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', async () => {
+                const taskId = button.dataset.id;
+                await fetch('/recycle_task', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task_id: taskId })
+                });
+                renderTasks();
+                renderRecycledTasks();
+            });
+        });
+    };
+
+    const addTask = async () => {
+        const taskText = newTaskInput.value.trim();
+        const taskDatetime = taskDateTimeInput.value;
+
+        if (!taskText || !taskDatetime) return;
+
+        const formData = new FormData();
+        formData.append('task', taskText);
+        formData.append('date_time', taskDatetime);
+
+        const response = await fetch('/add_task', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            newTaskInput.value = '';
+            taskDateTimeInput.value = '';
+            renderTasks();
+        } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.error);
+        }
+    };
+
+    const renderRecycledTasks = async () => {
+        const response = await fetch('/get_recycled_tasks');
+        const tasks = await response.json();
+
+        const listContainer = document.createElement('div');
+        listContainer.classList.add('task-list');
+
+        if (tasks.length === 0) {
+            listContainer.innerHTML = '<p class="empty-message">Recycle bin is empty. Nothing trashed yet! ♻️</p>';
+        } else {
+            tasks.forEach(task => {
+                const taskItem = document.createElement('div');
+                taskItem.classList.add('todo-item');
+                const formattedTime = new Date(task.datetime).toLocaleString('en-US', {
+                    year: 'numeric', month: 'short', day: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                });
+
+                taskItem.innerHTML = `
+                    <div class="task-content">
+                        <span class="task-text">${task.text}</span>
+                        <span class="completion-time">${formattedTime}</span>
+                    </div>
+                `;
+                listContainer.appendChild(taskItem);
+            });
+        }
+
+        recycleTasksList.innerHTML = '';
+        recycleTasksList.appendChild(listContainer);
+    };
+
+    addTaskButton.addEventListener('click', addTask);
+    newTaskInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') addTask();
+    });
+
+    renderTasks();
+    renderRecycledTasks();
+
+    const navButtons = document.querySelectorAll('.nav-button');
+    const sections = document.querySelectorAll('.section');
+
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.getAttribute('data-target');
+
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === targetId) section.classList.add('active');
+            });
+
+            if (targetId === 'recycle-bin-section') {
+                renderRecycledTasks();
+            }
+
+            if (targetId === 'habits-section') {
+                renderHabits();
+            }
+        });
+    });
+
+    // 🌸 Calendar Section Script
+    const calendarDateInput = document.getElementById('calendar-date');
+    const calendarEventInput = document.getElementById('calendar-event-input');
+    const addCalendarEventButton = document.getElementById('add-calendar-event');
+    const calendarEventList = document.getElementById('calendar-event-list');
+    const calendarGrid = document.getElementById('calendar-grid');
+    const monthYearLabel = document.getElementById('month-year-label');
+    const prevMonthBtn = document.getElementById('prev-month-btn');
+    const nextMonthBtn = document.getElementById('next-month-btn');
+
+    const getFormattedDate = (dateObj) => {
+        const year = dateObj.getFullYear();
+        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObj.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    let calendarViewDate = new Date();
+const renderCalendarEvents = async (dateStr) => {
+    const response = await fetch(`/get_events/${dateStr}`);
+   
+
+    const events = await response.json();
+    calendarEventList.innerHTML = '';
+
+    if (events.length === 0) {
+        calendarEventList.innerHTML = '<p class="empty-message">No events for this day! 🍡</p>';
+    } else {
+        const list = document.createElement('ul');
+        list.classList.add('task-list');
+
+        events.forEach(e => {
+            const item = document.createElement('li');
+            item.classList.add('todo-item');
+            item.innerHTML = `
+                <div class="task-content">
+                    <span class="task-text">📌 ${e.event}</span>
+                </div>
+                <div class="task-actions">
+                    <button class="event-delete-btn" data-id="${e.id}">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            `;
+            list.appendChild(item);
+        });
+
+        calendarEventList.appendChild(list);
+
+        // ✅ Add delete button logic here after rendering
+        list.querySelectorAll('.event-delete-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const eventId = button.dataset.id;
+                const res = await fetch(`/delete_event/${eventId}`, { method: 'POST' });
+                if (res.ok) {
+                    renderCalendarEvents(dateStr);  // Refresh event list after deletion
+                } else {
+                    alert('Failed to delete event.');
+                }
+            });
+        });
+    }
+};
+
+
+    const addCalendarEvent = async () => {
+        const eventText = calendarEventInput.value.trim();
+        const eventDate = calendarDateInput.value;
+
+        if (!eventText || !eventDate) return;
+
+        const formData = new FormData();
+        formData.append('event', eventText);
+        formData.append('event_date', eventDate);
+
+        const response = await fetch('/add_event', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            calendarEventInput.value = '';
+            renderCalendarEvents(eventDate);
+            renderCalendarGrid();
+        } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.error);
+        }
+    };
+
+    const renderCalendarGrid = async () => {
+    if (!calendarGrid) return;
+
+    const current = new Date(calendarViewDate);
+    const year = current.getFullYear();
+    const month = current.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    monthYearLabel.textContent = current.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    // Fetch event dates from backend
+    let eventDates = [];
+    try {
+        const res = await fetch('/get_event_dates');
+        eventDates = await res.json(); // array of YYYY-MM-DD
+    } catch (err) {
+        console.error("Failed to load event dates", err);
+    }
+
+    const selectedDateStr = calendarDateInput.value;
+    calendarGrid.innerHTML = '';
+
+    for (let i = 0; i < firstDay; i++) {
+        const spacer = document.createElement('div');
+        calendarGrid.appendChild(spacer);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        const cell = document.createElement('div');
+        cell.classList.add('calendar-cell');
+
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+
+        if (dateStr === getFormattedDate(new Date())) {
+            cell.classList.add('today');
+        }
+
+        if (dateStr === selectedDateStr) {
+            cell.classList.add('selected-date');
+        }
+
+        if (eventDates.includes(dateStr)) {
+            const star = document.createElement('span');
+            star.innerHTML = '📌';
+            star.classList.add('event-star');
+            cell.appendChild(star);
+        }
+
+        const dateEl = document.createElement('div');
+        dateEl.classList.add('cell-date');
+        dateEl.textContent = d;
+        cell.appendChild(dateEl);
+
+        cell.addEventListener('click', () => {
+            calendarDateInput.value = dateStr;
+            calendarViewDate = new Date(dateStr);
+            renderCalendarEvents(dateStr);
+            renderCalendarGrid();
+        });
+
+        calendarGrid.appendChild(cell);
+    }
+};
+
+    prevMonthBtn.addEventListener('click', () => {
+        calendarViewDate.setMonth(calendarViewDate.getMonth() - 1);
+        renderCalendarGrid();
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+        calendarViewDate.setMonth(calendarViewDate.getMonth() + 1);
+        renderCalendarGrid();
+    });
+
+    const todayStr = getFormattedDate(new Date());
+    calendarDateInput.value = todayStr;
+    calendarViewDate = new Date(todayStr);
+    renderCalendarEvents(todayStr);
+    renderCalendarGrid();
+
+    calendarDateInput.addEventListener('change', () => {
+        const selectedDate = calendarDateInput.value;
+        calendarViewDate = new Date(selectedDate);
+        renderCalendarEvents(selectedDate);
+        renderCalendarGrid();
+    });
+
+    addCalendarEventButton.addEventListener('click', addCalendarEvent);
+
+    // 🌼 Habits Section Scripts
+    const habitsSection = document.getElementById('habits-section');
+
+    const habitInput = document.createElement('input');
+    habitInput.type = 'text';
+    habitInput.placeholder = 'Enter a new habit...';
+    habitInput.classList.add('habit-input');
+
+    const habitTime = document.createElement('input');
+    habitTime.type = 'datetime-local';
+    habitTime.classList.add('habit-due');
+
+    const addHabitBtn = document.createElement('button');
+    addHabitBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Add Habit';
+    addHabitBtn.classList.add('add-button');
+
+    const habitList = document.createElement('div');
+    habitList.classList.add('task-list');
+
+    habitsSection.appendChild(habitInput);
+    habitsSection.appendChild(habitTime);
+    habitsSection.appendChild(addHabitBtn);
+    habitsSection.appendChild(habitList);
+
+    addHabitBtn.addEventListener('click', async () => {
+        const habit = habitInput.value.trim();
+        const due_time = habitTime.value;
+
+        if (!habit || !due_time) return;
+
+        const formData = new FormData();
+        formData.append('habit', habit);
+        formData.append('due_time', due_time);
+
+        const response = await fetch('/add_habit', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            habitInput.value = '';
+            habitTime.value = '';
+            renderHabits();
+        }
+    });
+
+    async function renderHabits() {
+        const res = await fetch('/get_habits');
+        const habits = await res.json();
+
+        habitList.innerHTML = '';
+        if (habits.length === 0) {
+            habitList.innerHTML = '<p class="empty-message">No habits yet! Start building good ones. 💪</p>';
+            return;
+        }
+
+        habits.forEach(habit => {
+            const div = document.createElement('div');
+            div.classList.add('todo-item');
+            if (habit.completed) div.classList.add('completed');
+
+            const formattedTime = new Date(habit.due_time).toLocaleString();
+
+            div.innerHTML = `
+                <div class="task-content">
+                    ${habit.can_check && !habit.completed ? `<input type="checkbox" class="habit-checkbox" data-id="${habit.id}">` : ''}
+                    <span class="task-text">${habit.habit}</span>
+                    <span class="completion-time">${formattedTime}</span>
+                </div>
+                <div class="task-actions">
+                    <button class="habit-delete-button" data-id="${habit.id}"><i class="fas fa-trash"></i></button>
+                </div>
+            `;
+
+            habitList.appendChild(div);
+        });
+
+        document.querySelectorAll('.habit-checkbox').forEach(cb => {
+            cb.addEventListener('change', async (e) => {
+                const habitId = e.target.dataset.id;
+                await fetch('/complete_habit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ habit_id: habitId })
+                });
+                renderHabits();
+            });
+        });
+
+        document.querySelectorAll('.habit-delete-button').forEach(button => {
+            button.addEventListener('click', async () => {
+                const habitId = button.dataset.id;
+                const confirmed = confirm("Are you sure you want to delete this habit?");
+                if (!confirmed) return;
+
+                await fetch('/delete_habit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ habit_id: habitId })
+                });
+
+                renderHabits();
+            });
+        });
+    }
+});
+</script>
+
+
+<script>
+    const taskDateTimeInput = document.getElementById('task-datetime');
+
+    function setMinDateTime() {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        const minDateTime = now.toISOString().slice(0, 16);
+        taskDateTimeInput.min = minDateTime;
+    }
+
+    window.addEventListener('DOMContentLoaded', setMinDateTime);
+</script>
+
+
+
+
+<script>
+let taskId = null;
+
+// Show popup on Edit button click
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('edit-task-btn')) {
+        taskId = e.target.dataset.id;
+        document.getElementById('edit-task-text').value = e.target.dataset.text;
+        document.getElementById('edit-task-datetime').value = e.target.dataset.datetime;
+        document.getElementById('edit-popup').style.display = 'block';
+    }
+});
+
+// Save edit
+document.getElementById('save-edit-btn').addEventListener('click', async () => {
+    const newText = document.getElementById('edit-task-text').value.trim();
+    const newDateTime = document.getElementById('edit-task-datetime').value;
+
+    if (!newText || !newDateTime) return;
+
+    const response = await fetch('/update_task', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            task_id: taskId,
+            new_text: newText,
+            new_datetime: newDateTime
+        })
+    });
+
+    if (response.ok) {
+        document.getElementById('edit-popup').style.display = 'none';
+        location.reload();  // 🔁 Refresh to show updated task
+    } else {
+        alert('❌ Failed to update task.');
+    }
+});
+
+// Cancel button
+document.getElementById('cancel-edit-btn').addEventListener('click', () => {
+    document.getElementById('edit-popup').style.display = 'none';
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const settingsSection = document.getElementById("settings-section");
+
+    function loadSettings() {
+        fetch("/get_user_settings")
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    settingsSection.innerHTML = `<p class="empty-message">Please log in to view settings.</p>`;
+                    return;
+                }
+
+                settingsSection.innerHTML = `
+                    <div class="settings-container">
+                        <h2>⚙️ User Details</h2>
+                        <ul class="settings-list">
+                            <li><span class="settings-label">Username:</span> ${data.username}</li>
+                            <li><span class="settings-label">Email:</span> ${data.email}</li>
+                            <li><span class="settings-label">Coins 💰:</span> ${data.coins}</li>
+                            <li><span class="settings-label">Level ⭐:</span> ${data.level}</li>
+                            <li><span class="settings-label">Streak 🔥:</span> ${data.streak}</li>
+                        </ul>
+                    </div>
+                `;
+            })
+            .catch(err => {
+                console.error("Error loading settings:", err);
+                settingsSection.innerHTML = `<p class="empty-message">Error loading settings.</p>`;
+            });
+    }
+
+    document.querySelector('[data-target="settings-section"]').addEventListener("click", loadSettings);
+});
+</script>
+
+
+</body>
+</html>
