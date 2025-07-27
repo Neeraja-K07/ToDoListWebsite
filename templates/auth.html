@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up - Kawaii To-Do!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='authstyle.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="auth-page-body">
+    <div class="auth-container">
+        <header class="auth-header">
+            <h1>Welcome ! </h1>
+        </header>
+
+        <main class="auth-main">
+            <div class="auth-tabs">
+                <button class="auth-tab-button active" id="login-tab">Login</button>
+                <button class="auth-tab-button" id="signup-tab">Sign Up</button>
+            </div>
+
+            <div id="login-section" class="auth-section active">
+                <form class="auth-form" action="{{ url_for('login') }}" method="POST">
+                    <div class="input-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" name="username" placeholder="username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" placeholder="password" required>
+                    </div>
+                    <button type="submit" class="auth-submit-button login-submit-button">Login Now!</button>
+                    <a href="{{ url_for('reset_password') }}" class="forgot-password-link">Forgot Password?</a>
+                </form>
+            </div>
+
+            <div id="signup-section" class="auth-section">
+                <form class="auth-form" action="{{ url_for('signup') }}" method="POST">
+                    <div class="input-group">
+                        <label for="signup-username">Choose Username</label>
+                        <input type="text" id="signup-username" name="username" placeholder="Pick a username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-email">Your Email</label>
+                        <input type="email" id="signup-email" name="email" placeholder="Your email for magic" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-password">Create Password</label>
+                        <input type="password" id="signup-password" name="password" placeholder="Make it strong & sweet" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <input type="password" id="signup-confirm-password" placeholder="Retype your password" required>
+                    </div>
+                    <button type="submit" class="auth-submit-button signup-submit-button">Join the Kawaii Crew!</button>
+                </form>
+            </div>
+        </main>
+        <p class="back-link-wrapper">
+            <a href="{{ url_for('home') }}" class="back-to-home-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginTabButton = document.getElementById('login-tab');
+            const signupTabButton = document.getElementById('signup-tab');
+            const loginSection = document.getElementById('login-section');
+            const signupSection = document.getElementById('signup-section');
+
+            loginTabButton.addEventListener('click', () => {
+                loginSection.classList.add('active');
+                signupSection.classList.remove('active');
+                loginTabButton.classList.add('active');
+                signupTabButton.classList.remove('active');
+            });
+
+            signupTabButton.addEventListener('click', () => {
+                signupSection.classList.add('active');
+                loginSection.classList.remove('active');
+                signupTabButton.classList.add('active');
+                loginTabButton.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
 
