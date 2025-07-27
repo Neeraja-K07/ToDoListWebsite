@@ -43,23 +43,41 @@ Screenshots
 
 Folder Structure
 ToDoList/
+
 ├── app.py
+
 ├── database.py
+
 ├── requirements.txt
+
 ├── users.db
+
 ├── static/
+
 │   ├── authstyle.css
+
 │   ├── landingstyle.css
+
 │   ├── resetpasswordstyle.css
+
 │   ├── style.css
+
 │   └── icons/
+
 │       ├── bear.png
+
 │       ├── honey.png
+
 │       └── ToDoListIcon.jpg
+
 ├── templates/
+
 │   ├── auth.html
+
 │   ├── index.html
+
 │   ├── landing.html
+
 │   └── resetpassword.html
 
 
