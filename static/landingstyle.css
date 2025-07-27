@@ -1,0 +1,595 @@
+/* General Body and HTML Reset */
+html {
+    scroll-behavior: smooth;
+    height: 100%; /* Ensure html takes full height for body centering */
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #4A2C2A; /* Dark brown text */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to start, not center, for better scrolling */
+    padding: 10px 0; /* Vertical padding for aesthetic spacing */
+    box-sizing: border-box; /* Include padding in height calculation */
+}
+
+/* Base Body Style for Landing Page (overrides general body for specific background) */
+.landing-page-body {
+    background-color: #F8F4E3; /* Light cream/beige background */
+    align-items: center; /* Center vertically for landing page */
+}
+
+/* Base Body Style for To-Do App (different background variant) */
+.todo-app-body {
+    background-color: #F8F4E3; /* Same light cream/beige for consistency */
+}
+
+
+/* Kawaii Font from Google Fonts */
+h1, h2, h3, h4 {
+    font-family: 'Cherry Bomb One', cursive;
+    color: #8B4513; /* SaddleBrown for headers */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Container Wrappers (for both Landing and App) --- */
+.landing-wrapper, .app-wrapper {
+    background-color: #FDF5E6; /* Floral White for main container */
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    /* max-width: 1000px; Wider for a more spacious feel */
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between sections */
+    border: 3px solid #D2B48C; /* Tan border */
+    min-height: calc(100vh - 60px); /* Adjust min-height to account for body padding */
+}
+
+/* --- Landing Page Specific Styles --- */
+.landing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #D2B48C;
+}
+
+.landing-header .logo h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.auth-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-button {
+    background-color: #CD853F; /* Peru brown */
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.auth-button:hover {
+    background-color: #B87333; /* Bronze */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.auth-button.signup-btn {
+    background-color: #A0522D; /* Sienna - slightly different for signup */
+}
+
+.auth-button.signup-btn:hover {
+    background-color: #8B4513; /* SaddleBrown */
+}
+
+/* Hero Section - now with image */
+.hero-section {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    align-items: center;
+    justify-content: center;
+    background-color: #FFE4B5; /* Moccasin */
+    border-radius: 20px;
+    padding: 30px 40px; /* Increased padding */
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #D2B48C;
+    gap: 30px; /* Space between text and image */
+}
+
+.hero-text {
+    flex: 1; /* Allows text to grow */
+    min-width: 400px; /* Minimum width for text column */
+    text-align: left; /* Align text left */
+}
+
+.hero-text h2 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: #8B4513;
+    line-height: 1.2;
+}
+
+.hero-tagline {
+    font-size: 1.3em;
+    color: #5A3A38;
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    flex-shrink: 0; /* Prevents image from shrinking */
+    max-width: 350px; /* Max width for image */
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+.cta-button {
+    display: inline-block;
+    background-color: #CD853F; /* Peru brown */
+    color: #FFF;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    background-color: #B87333; /* Bronze */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Features Section */
+.features-section {
+    padding: 30px 0;
+    border-top: 2px dashed #D2B48C;
+    text-align: center; /* Center the heading */
+}
+
+.features-section h3 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #A0522D; /* Sienna */
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 3fr));
+    gap: 35px;
+}
+.features-row {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.features-row .feature-item {
+    flex: 1 1 400px;  /* Minimum width of 280px, grows if space available */
+    max-width: 450px; /* Optional to limit width */
+}
+
+
+.feature-item {
+    background-color: #FFF8DC; /* Cornsilk */
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #F5DEB3; /* Wheat border */
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 3em;
+    color: #CD853F; /* Peru brown */
+    margin-bottom: 15px;
+    display: block;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.feature-item h4 {
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 1.5em;
+    color: #8B4513; /* SaddleBrown */
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 0.95em;
+    color: #6B4D4B; /* Slightly darker brown for feature text */
+    line-height: 1.6;
+}
+
+/* Landing Page Footer */
+.landing-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 2px dashed #D2B48C;
+    margin-top: auto; /* Push footer to bottom in flex column */
+    color: #A0522D; /* Sienna */
+    font-size: 0.9em;
+}
+
+/* --- To-Do App Specific Styles --- */
+.app-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #D2B48C;
+}
+
+.app-header h1 {
+    font-size: 2.8em;
+    margin-bottom: 15px;
+    letter-spacing: 1.5px;
+}
+
+/* Navigation Buttons */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.nav-button {
+    background-color: #CD853F; /* Peru brown */
+    color: #FFF;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-button:hover {
+    background-color: #B87333; /* Bronze */
+    transform: translateY(-2px);
+}
+
+.nav-button.active {
+    background-color: #8B4513; /* SaddleBrown */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Main Content Sections */
+.app-main-content {
+    flex-grow: 1; /* Allow main content to fill space */
+}
+
+.section {
+    display: none; /* Hide sections by default */
+}
+
+.section.active {
+    display: block; /* Show active section */
+}
+
+/* Add Task Area */
+.add-task-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #FAEBD7; /* AntiqueWhite */
+    border-radius: 15px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.add-task-area input[type="text"],
+.add-task-area input[type="datetime-local"] {
+    flex: 1;
+    padding: 12px 18px;
+    border: 2px solid #D2B48C;
+    border-radius: 10px;
+    font-size: 1em;
+    color: #4A2C2A;
+    background-color: #FFF;
+    min-width: 180px;
+}
+
+.add-task-area input::placeholder {
+    color: #A0522D;
+    opacity: 0.8;
+}
+
+.add-task-area input:focus {
+    outline: none;
+    border-color: #8B4513;
+    box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+}
+
+.add-button {
+    background-color: #A0522D; /* Sienna */
+    color: #FFF;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-button:hover {
+    background-color: #8B4513; /* SaddleBrown */
+    transform: translateY(-2px);
+}
+
+/* Task List Styling */
+.task-list {
+    background-color: #FFF8DC; /* Cornsilk - for the note-taking area */
+    border-radius: 15px;
+    padding: 20px;
+    min-height: 200px;
+    border: 2px solid #F5DEB3; /* Wheat border */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    /* Small Cheque Background */
+    background-image: linear-gradient(45deg, #F0E6D8 25%, transparent 25%),
+                      linear-gradient(-45deg, #F0E6D8 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #F0E6D8 75%),
+                      linear-gradient(-45deg, transparent 75%, #F0E6D8 75%);
+    background-size: 10px 10px; /* Size of the squares */
+    background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+    background-color: #FFF8DC; /* Fallback for background color */
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFE4B5; /* Moccasin */
+    border: 1px solid #D2B48C; /* Tan */
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 12px;
+}
+
+.task-checkbox {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #8B4513;
+    border-radius: 5px;
+    background-color: #FFF;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.task-checkbox:checked {
+    background-color: #8B4513;
+    border-color: #8B4513;
+}
+
+.task-checkbox:checked::after {
+    content: '✔';
+    color: #FFF;
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.task-text {
+    font-size: 1.1em;
+    color: #4A2C2A;
+    flex-grow: 1;
+}
+
+.completion-time {
+    font-size: 0.85em;
+    color: #A0522D;
+    font-style: italic;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.todo-item.completed .task-text {
+    text-decoration: line-through;
+    color: #8B4513;
+    opacity: 0.7;
+}
+
+.todo-item.completed .completion-time {
+    color: #8B4513;
+    opacity: 0.7;
+}
+
+.task-actions {
+    margin-left: 15px;
+}
+
+.delete-button {
+    background-color: #DC143C; /* Crimson */
+    color: #FFF;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+    background-color: #C11033;
+    transform: scale(1.05);
+}
+
+/* Recycle Bin Specifics */
+#recycle-bin-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #A0522D;
+}
+
+.empty-message {
+    text-align: center;
+    color: #8B4513;
+    font-style: italic;
+    padding: 30px;
+    border: 1px dashed #D2B48C;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+    .landing-wrapper, .app-wrapper {
+        max-width: 700px; /* Reduce max-width for medium screens */
+    }
+
+    .hero-section {
+        flex-direction: column; /* Stack text and image */
+        text-align: center;
+        padding: 30px;
+    }
+
+    .hero-text {
+        text-align: center; /* Center text when stacked */
+    }
+
+    .hero-image {
+        margin-top: 20px; /* Add space between text and image */
+        max-width: 300px; /* Smaller max width for image on smaller screens */
+    }
+
+    .hero-text h2 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px 0; /* Less padding on very small screens */
+    }
+
+    .landing-wrapper, .app-wrapper {
+        padding: 20px;
+        width: 95%; /* Take more width on small screens */
+        min-height: unset; /* Allow wrapper to size content */
+    }
+
+    .landing-header, .app-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .auth-nav, .main-nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .auth-button, .nav-button {
+        flex: 1; /* Make buttons take equal width */
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
+
+    .landing-header .logo h1, .app-header h1 {
+        font-size: 2em;
+    }
+
+    .hero-section h2 {
+        font-size: 2em;
+    }
+
+    .hero-tagline {
+        font-size: 1em;
+    }
+
+    .features-section h3 {
+        font-size: 1.8em;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Stack features on smaller screens */
+    }
+
+    .add-task-area {
+        flex-direction: column;
+    }
+
+    .add-task-area input[type="text"],
+    .add-task-area input[type="datetime-local"],
+    .add-button {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .todo-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .task-content {
+        width: 100%;
+    }
+
+    .completion-time {
+        margin-left: 0;
+        margin-top: 5px;
+        text-align: right;
+        width: 100%;
+    }
+
+    .task-actions {
+        width: 100%;
+        text-align: right;
+        margin-left: 0;
+    }
+}

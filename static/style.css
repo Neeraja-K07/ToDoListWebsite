@@ -1,0 +1,1344 @@
+/* --- General Body and HTML Reset */
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #4A2C2A; /* Dark brown text */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    box-sizing: border-box;
+    background-color: #F8F4E3; /* Light cream/beige background */
+}
+
+/* Specific body styles for different pages */
+.landing-page-body {
+    align-items: center; /* Center content vertically for landing page */
+}
+
+.todo-app-body {
+    align-items: flex-start; /* Align main app content to top */
+}
+
+.auth-page-body {
+    align-items: center; /* Center content vertically for auth page */
+}
+
+/* Kawaii Font from Google Fonts */
+h1, h2, h3, h4 {
+    font-family: 'Cherry Bomb One', cursive;
+    color: #8B4513; /* SaddleBrown for headers */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Container Wrappers (for both Landing and App) */
+.landing-wrapper, .app-wrapper, .auth-container {
+    background-color: #FDF5E6; /* Floral White for main container */
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #D2B48C; /* Tan border */
+    min-height: calc(100vh - 60px); /* Adjust min-height to account for body padding */
+}
+
+/* Specific wrapper max-widths and gaps */
+.landing-wrapper {
+    max-width: 1000px;
+    gap: 30px;
+}
+
+.app-wrapper {
+    max-width: 1000px; /* Wider for the app layout */
+    gap: 20px;
+}
+
+.auth-container {
+    max-width: 500px;
+    gap: 25px;
+    text-align: center; /* Center content like header, tabs */
+}
+
+
+/* --- Landing Page Specific Styles --- */
+.landing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #D2B48C;
+}
+
+.landing-header .logo h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.auth-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-button {
+    background-color: #CD853F; /* Peru brown */
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.auth-button:hover {
+    background-color: #B87333; /* Bronze */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.auth-button.signup-btn {
+    background-color: #A0522D; /* Sienna - slightly different for signup */
+}
+
+.auth-button.signup-btn:hover {
+    background-color: #8B4513; /* SaddleBrown */
+}
+
+/* Hero Section - now with image */
+.hero-section {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    align-items: center;
+    justify-content: center;
+    background-color: #FFE4B5; /* Moccasin */
+    border-radius: 20px;
+    padding: 30px 40px; /* Increased padding */
+    margin-bottom: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #D2B48C;
+    gap: 30px; /* Space between text and image */
+}
+
+.hero-text {
+    flex: 1; /* Allows text to grow */
+    min-width: 300px; /* Minimum width for text column */
+    text-align: left; /* Align text left */
+}
+
+.hero-text h2 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: #8B4513;
+    line-height: 1.2;
+}
+
+.hero-tagline {
+    font-size: 1.3em;
+    color: #5A3A38;
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    flex-shrink: 0; /* Prevents image from shrinking */
+    max-width: 350px; /* Max width for image */
+    text-align: center;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #CD853F; /* Peru brown */
+    color: #FFF;
+    text-decoration: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    background-color: #B87333; /* Bronze */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Features Section */
+.features-section {
+    padding: 30px 0;
+    border-top: 2px dashed #D2B48C;
+    text-align: center; /* Center the heading */
+}
+
+.features-section h3 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #A0522D; /* Sienna */
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.feature-item {
+    background-color: #FFF8DC; /* Cornsilk */
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #F5DEB3; /* Wheat border */
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 3em;
+    color: #CD853F; /* Peru brown */
+    margin-bottom: 15px;
+    display: block;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.feature-item h4 {
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 1.5em;
+    color: #8B4513; /* SaddleBrown */
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 0.95em;
+    color: #6B4D4B; /* Slightly darker brown for feature text */
+    line-height: 1.6;
+}
+
+/* Landing Page Footer */
+.landing-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 2px dashed #D2B48C;
+    margin-top: auto; /* Push footer to bottom in flex column */
+    color: #A0522D; /* Sienna */
+    font-size: 0.9em;
+}
+
+/* --- To-Do App Specific Styles --- */
+.app-main {
+    display: flex; /* Use flexbox for side-nav and content */
+    flex-grow: 1; /* Allow main content to fill space */
+    gap: 25px;
+}
+
+.app-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px dashed #D2B48C;
+}
+
+.header-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Space between images and title */
+}
+
+.header-bear-img,
+.header-honeypot-img {
+    height: 70px; /* Adjust size as needed */
+    width: auto;
+    object-fit: contain;
+    transform: rotate(-5deg); /* Slight rotation for whimsy */
+}
+
+.header-honeypot-img {
+    transform: rotate(5deg);
+}
+
+.app-header h1 {
+    font-size: 2.8em;
+    margin: 0; /* Remove default margin */
+    letter-spacing: 1.5px;
+}
+
+/* Side Navigation Bar */
+.side-nav {
+    flex-shrink: 0; /* Prevent shrinking */
+    width: 200px; /* Fixed width for navigation */
+    background-color: #FFF8DC; /* Cornsilk - light background for nav */
+    border-radius: 18px;
+    padding: 20px 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border: 1px solid #F5DEB3; /* Wheat border */
+    display: flex;
+    flex-direction: column;
+}
+
+.side-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.side-nav li {
+    width: 100%;
+}
+
+.nav-button {
+    background-color: #CD853F; /* Peru brown */
+    color: #FFF;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 0 20px 20px 0; /* Rounded right side */
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: calc(100% - 25px); /* Adjust for padding on the left */
+    text-align: left;
+    white-space: nowrap; /* Prevent text wrapping */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: -5px; /* Pull slightly left to overlap border */
+}
+
+.nav-button:hover {
+    background-color: #B87333; /* Bronze */
+    transform: translateX(5px); /* Move right on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button.active {
+    background-color: #8B4513; /* SaddleBrown */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transform: translateX(10px); /* More pronounced move for active */
+    font-weight: bold;
+}
+
+.nav-button i {
+    font-size: 1.2em;
+}
+
+.back-to-home-btn {
+    margin-top: 20px; /* Space from other nav items */
+    background-color: #A0522D; /* Sienna */
+}
+
+.back-to-home-btn:hover {
+    background-color: #6D350A; /* Darker brown */
+}
+
+
+/* Main Content Area */
+.app-content-area {
+    flex-grow: 1; /* Takes remaining space */
+    background-color: #FDF5E6; /* Same as wrapper but distinct */
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
+    border: 2px solid #D2B48C;
+}
+
+.section {
+    display: none; /* Hide sections by default */
+}
+
+.section.active {
+    display: block; /* Show active section */
+}
+
+.section h2 {
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: #A0522D; /* Sienna */
+    text-align: center;
+}
+
+/* Add Task Area */
+.add-task-area {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping inputs on smaller screens */
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #FAEBD7; /* AntiqueWhite */
+    border-radius: 15px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F5DEB3; /* Wheat border */
+}
+
+.add-task-area input[type="text"],
+.add-task-area input[type="datetime-local"] {
+    flex: 1; /* Allow inputs to grow */
+    padding: 12px 18px;
+    border: 2px solid #D2B48C; /* Tan */
+    border-radius: 10px;
+    font-size: 1em;
+    color: #4A2C2A;
+    background-color: #FFF;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    min-width: 180px; /* Minimum width before wrapping */
+}
+
+.add-task-area input::placeholder {
+    color: #A0522D;
+    opacity: 0.8;
+}
+
+.add-task-area input:focus {
+    outline: none;
+    border-color: #8B4513; /* SaddleBrown */
+    box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+}
+
+.add-button {
+    background-color: #A0522D; /* Sienna */
+    color: #FFF;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.add-button:hover {
+    background-color: #8B4513; /* SaddleBrown */
+    transform: translateY(-2px);
+}
+
+/* Task List Styling with Criss-Crossed Lines */
+.task-list {
+    background-color: #FFF8DC; /* Cornsilk - for the note-taking area */
+    border-radius: 15px;
+    padding: 20px;
+    min-height: 250px; /* Minimum height for the list area */
+    border: 2px solid #F5DEB3; /* Wheat border */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    /* Small Cheque Background for criss-crossed lines */
+    background-image: linear-gradient(45deg, #F0E6D8 25%, transparent 25%),
+                      linear-gradient(-45deg, #F0E6D8 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, #F0E6D8 75%),
+                      linear-gradient(-45deg, transparent 75%, #F0E6D8 75%);
+    background-size: 15px 15px; /* Size of the squares/lines */
+    background-position: 0 0, 0 7.5px, 7.5px -7.5px, -7.5px 0px; /* Offset for better pattern */
+    background-color: #FFF8DC; /* Fallback for background color */
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:  #D2B48C; /* Moccasin */
+    border: 1px solid #D2B48C; /* Tan */
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-item:last-child {
+    margin-bottom: 0; /* No margin after the last item */
+}
+
+.todo-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 15px;
+    margin-left: 10px; 
+}
+
+.task-checkbox {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #8B4513; /* Dark brown border for checkbox */
+    border-radius: 5px;
+    background-color: #FFF;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+
+.task-checkbox:checked {
+    background-color: #8B4513; /* SaddleBrown when checked */
+    border-color: #8B4513;
+}
+
+.task-checkbox:checked::after {
+    content: '✔'; /* Checkmark symbol */
+    color: #FFF;
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.task-text {
+    font-size: 1.1em;
+    color: #4A2C2A;
+    flex-grow: 1;
+    word-break: break-word; /* Break long words */
+}
+
+.completion-time {
+    font-size: 0.85em;
+    color: #A0522D; /* Sienna */
+    font-style: italic;
+    margin-left: 10px;
+    white-space: nowrap; /* Keep time on one line */
+    flex-shrink: 0;
+}
+
+.todo-item.completed .task-text {
+    text-decoration: line-through;
+    color: #8B4513;
+    opacity: 0.7;
+}
+
+.todo-item.completed .completion-time {
+    color: #8B4513;
+    opacity: 0.7;
+}
+
+.task-actions {
+    margin-left: 15px;
+    flex-shrink: 0;
+}
+
+.delete-button {
+    background-color: #DC143C; /* Crimson */
+    color: #FFF;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+    background-color: #C11033;
+    transform: scale(1.05);
+}
+
+.empty-message {
+    text-align: center;
+    color: #8B4513;
+    font-style: italic;
+    padding: 30px;
+    border: 1px dashed #D2B48C;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+
+/* App Footer */
+.app-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 2px dashed #D2B48C;
+    margin-top: auto; /* Push footer to bottom in flex column */
+    color: #A0522D; /* Sienna */
+    font-size: 0.9em;
+}
+
+
+/* --- Authentication Page Specific Styles --- */
+.auth-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #8B4513;
+}
+
+/* Auth Tabs (Login/Sign Up Buttons) */
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    border-bottom: 2px dashed #F5DEB3; /* Wheat */
+    padding-bottom: 5px;
+}
+
+.auth-tab-button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-family: 'Cherry Bomb One', cursive;
+    color: #CD853F; /* Peru brown */
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    top: 2px; /* Slight lift for visual effect */
+}
+
+.auth-tab-button:hover {
+    color: #B87333; /* Bronze */
+    transform: translateY(-2px);
+}
+
+.auth-tab-button.active {
+    color: #8B4513; /* SaddleBrown */
+    border-bottom: 3px solid #8B4513;
+    font-weight: bold;
+}
+
+/* Auth Sections (Login Form, Sign Up Form) */
+.auth-section {
+    display: none; /* Hidden by default */
+}
+
+.auth-section.active {
+    display: block; /* Shown when active */
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left; /* Align form elements left */
+    background-color: #FFF8DC; /* Cornsilk - light background for form */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F5DEB3; /* Wheat border */
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 1em;
+    color: #A0522D; /* Sienna */
+    font-weight: bold;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"],
+.auth-form input[type="email"] {
+    padding: 12px 18px;
+    border: 2px solid #D2B48C; /* Tan */
+    border-radius: 10px;
+    font-size: 1em;
+    color: #4A2C2A;
+    background-color: #FFF;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input::placeholder {
+    color: #A0522D;
+    opacity: 0.7;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #8B4513; /* SaddleBrown */
+    box-shadow: 0 0 5px rgba(139, 69, 19, 0.3);
+}
+
+.auth-submit-button {
+    background-color: #CD853F; /* Peru brown */
+    color: #FFF;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+}
+
+.auth-submit-button:hover {
+    background-color: #B87333; /* Bronze */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-submit-button {
+    background-color: #A0522D; /* Sienna for login */
+}
+.login-submit-button:hover {
+    background-color: #8B4513; /* SaddleBrown */
+}
+
+.signup-submit-button {
+    background-color: #8B4513; /* SaddleBrown for signup */
+}
+.signup-submit-button:hover {
+    background-color: #6D350A; /* Darker brown */
+}
+
+.reset-submit-button { /* New style for reset password button */
+    background-color: #5F9EA0; /* CadetBlue - a gentle contrast */
+}
+
+.reset-submit-button:hover {
+    background-color: #4682B4; /* SteelBlue */
+}
+
+.forgot-password-link {
+    display: block; /* Make it take full width */
+    text-align: center;
+    font-size: 0.9em;
+    color: #A0522D; /* Sienna */
+    text-decoration: none;
+    margin-top: 15px;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-link:hover {
+    color: #8B4513; /* SaddleBrown */
+    text-decoration: underline;
+}
+
+.reset-intro { /* New style for intro text on reset page */
+    font-size: 1em;
+    color: #6B4D4B;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.back-link-wrapper {
+    margin-top: 20px;
+}
+
+.back-to-home-link {
+    color: #A0522D; /* Sienna */
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-to-home-link:hover {
+    color: #8B4513; /* SaddleBrown */
+    transform: translateX(-5px);
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+    .landing-wrapper {
+        max-width: 700px; /* Reduce max-width for medium screens */
+    }
+
+    .hero-section {
+        flex-direction: column; /* Stack text and image */
+        text-align: center;
+        padding: 30px;
+    }
+
+    .hero-text {
+        text-align: center; /* Center text when stacked */
+    }
+
+    .hero-image {
+        margin-top: 20px; /* Add space between text and image */
+        max-width: 300px; /* Smaller max width for image on smaller screens */
+    }
+
+    .hero-text h2 {
+        font-size: 2.5em;
+    }
+
+    /* Adjust app layout for smaller screens */
+    .app-main {
+        flex-direction: column; /* Stack side-nav and content */
+    }
+
+    .side-nav {
+        width: 100%; /* Full width for nav */
+        padding: 10px 0;
+        border-radius: 18px; /* Consistent border radius */
+    }
+
+    .side-nav ul {
+        flex-direction: row; /* Make nav items horizontal */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px; /* Smaller gap */
+    }
+
+    .side-nav li {
+        width: auto; /* Allow buttons to size to content */
+    }
+
+    .nav-button {
+        border-radius: 20px; /* Fully rounded buttons */
+        padding: 8px 15px;
+        font-size: 1em;
+        margin-left: 0;
+        width: auto;
+        justify-content: center; /* Center icon and text */
+        transform: none !important;/* Override hover/active transforms*/
+    }
+
+    .nav-button:hover,
+    .nav-button.active {
+        transform: none !important; 
+    }
+
+    .app-content-area {
+        padding: 20px; /* Less padding */
+    }
+
+    .header-bear-img,
+    .header-honeypot-img {
+        height: 50px; /* Smaller images */
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px 0; /* Less padding on very small screens */
+    }
+
+    .landing-wrapper, .app-wrapper, .auth-container {
+        padding: 20px;
+        width: 95%; /* Take more width on small screens */
+        min-height: unset; /* Allow wrapper to size content */
+    }
+
+    .landing-header, .app-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .auth-nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .auth-button {
+        flex: 1; /* Make buttons take equal width */
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
+
+    .landing-header .logo h1, .app-header h1, .auth-header h1 {
+        font-size: 2em;
+    }
+
+    .hero-section h2 {
+        font-size: 2em;
+    }
+
+    .hero-tagline {
+        font-size: 1em;
+    }
+
+    .features-section h3 {
+        font-size: 1.8em;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr; /* Stack features on smaller screens */
+    }
+
+    .add-task-area {
+        flex-direction: column;
+    }
+
+    .add-task-area input[type="text"],
+    .add-task-area input[type="datetime-local"],
+    .add-button {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .todo-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .task-content {
+        width: 100%;
+    }
+
+    .completion-time {
+        margin-left: 0;
+        margin-top: 5px;
+        text-align: right;
+        width: 100%;
+    }
+
+    .task-actions {
+        width: 100%;
+        text-align: right;
+        margin-left: 0;
+    }
+
+    .auth-tab-button {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+
+    .auth-form input {
+        font-size: 0.9em;
+    }
+
+    .auth-submit-button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+}
+#clear-recycle-bin-button {
+    background-color: #8B4513; /* red tone */
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+#clear-recycle-bin-button:hover {
+    background-color: #c0392b;
+}
+
+#clear-recycle-bin-button:active {
+    transform: scale(0.98);
+}
+/* 🌸 Calendar Section Styling */
+#calendar-section {
+    padding: 1.5rem;
+    background-color: #f7ddbb;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
+    font-family: 'Open Sans', sans-serif;
+}
+
+.calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1rem;
+    align-items: center;
+    background-color: #f7ddbb;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(255, 182, 193, 0.2);
+}
+
+.calendar-container input[type="date"],
+.calendar-container input[type="text"] {
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #8B4513;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #333;
+    flex: 1;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.calendar-container input[type="text"]::placeholder {
+    color: #8B4513;
+}
+
+#calendar-event-list {
+    padding: 1rem;
+    background-color: #D2B48C;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(255, 182, 193, 0.2);
+    min-height: 120px;
+}
+
+#calendar-event-list ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#calendar-event-list .todo-item {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: #D2B48C;
+    border-left: 5px solid #D2B48C;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #444;
+}
+
+.empty-message {
+    font-style: italic;
+    color: #999;
+    text-align: center;
+}
+
+/* 🌟 Cute Add Event Button */
+#add-calendar-event.add-button {
+    background-color: #D2B48C;
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Cherry Bomb One', cursive;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+#add-calendar-event.add-button:hover {
+    background-color: #D2B48C;
+}
+
+#add-calendar-event i {
+    font-size: 1.2rem;
+}
+
+
+   .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      background-color: #fffafc;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(255,182,193,0.2);
+    }
+    .calendar-cell {
+      background: #D2B48C;
+      padding: 0.75rem;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      font-family: 'Open Sans', sans-serif;
+      position: relative;
+    }
+    .calendar-cell:hover {
+      background: #a9522dd6;
+    }
+    .calendar-cell.today {
+      border: 2px solid #D2B48C;
+    }
+    .cell-date {
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+#habits-section {
+  background-color: #fdf6f0; /* light beige background */
+  border: 2px dashed #d2b48c; /* tan border */
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(139, 69, 19, 0.2); /* soft brown shadow */
+  font-family: 'Comic Sans MS', cursive;
+}
+
+#habits-section h2 {
+  color: #8b4513; /* dark brown */
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#habits-section .empty-message {
+  color: #a0522d; /* sienna brown */
+  font-size: 1.1rem;
+  text-align: center;
+  background-color: #fff7f0;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #deb887;
+  margin-top: 10px;
+}
+
+/* 🧋 Habit input box */
+.habit-input {
+  padding: 10px 15px;
+  border: 2px solid #d2b48c; /* tan */
+  border-radius: 12px;
+  font-size: 1rem;
+  margin: 10px 5px;
+  background-color: #fffaf0; /* floral white */
+  color: #5c4033;
+  width: 60%;
+  font-family: 'Comic Sans MS', cursive;
+  box-shadow: 2px 2px 6px rgba(139, 69, 19, 0.1);
+}
+
+/* ⏰ Date/Time input */
+.habit-due {
+  padding: 10px 12px;
+  border: 2px solid #deb887; /* burlywood */
+  border-radius: 12px;
+  font-size: 1rem;
+  margin: 10px 5px;
+  background-color: #fffaf0;
+  color: #5c4033;
+  font-family: 'Comic Sans MS', cursive;
+  box-shadow: 2px 2px 6px rgba(139, 69, 19, 0.1);
+}
+
+/* ➕ Add Habit Button */
+.add-button {
+  padding: 10px 18px;
+  background-color: #d2b48c; /* tan */
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 5px;
+  transition: background-color 0.3s ease;
+  font-family: 'Comic Sans MS', cursive;
+  box-shadow: 2px 2px 8px rgba(139, 69, 19, 0.2);
+}
+
+.add-button:hover {
+  background-color:  #5c4033; /* darker goldenrod */
+}
+
+
+.habit-delete-button {
+    background-color:#866336a2; /* soft pink */
+    border: none;
+    border-radius: 10px;
+    padding: 6px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.habit-delete-button:hover {
+    background-color: #5c4033; /* deeper pink on hover */
+    transform: scale(1.05);
+}
+
+.habit-delete-button i {
+    color: white;
+    font-size: 16px;
+}
+
+
+
+.selected-date {
+    border: 2px solid #5c4033;
+    border-radius: 50%;
+    padding: 5px;
+    background-color:  #d2b48c;
+}
+
+.event-star {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 0.8rem;
+    color: #5c4033;
+}
+
+.calendar-cell {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.event-delete-btn{
+    background-color:#866336a2; /* soft pink */
+    border: none;
+    border-radius: 10px;
+    padding: 6px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-delete-button:hover {
+    background-color: #5c4033; /* deeper pink on hover */
+    transform: scale(1.05);
+}
+
+.event-delete-button i {
+    color: white;
+    font-size: 16px;
+}
+
+.habit-checkbox{
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #8B4513; /* Dark brown border for checkbox */
+    border-radius: 5px;
+    background-color: #FFF;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+
+.habit-checkbox:checked {
+    background-color: #8B4513; /* SaddleBrown when checked */
+    border-color: #8B4513;
+}
+
+.habit-checkbox:checked::after {
+    content: '✔'; /* Checkmark symbol */
+    color: #FFF;
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.edit-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color:  #d2b48c; /* light beige */
+    border: 2px solid #d2b48c; /* tan border */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.popup-content {
+    padding: 20px 25px;
+    text-align: center;
+}
+
+.popup-content h3 {
+    margin-bottom: 15px;
+    color: #5a4635;
+    font-size: 1.5rem;
+}
+
+.popup-content input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d2b48c;
+    border-radius: 8px;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #fffaf0;
+}
+
+.popup-content button {
+    margin: 10px 5px 0;
+    padding: 8px 16px;
+    font-size: 1rem;
+    background-color: #f0e68c; /* khaki */
+    border: 1px solid #c78016a4;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    transition: background-color 0.2s ease;
+}
+
+.popup-content button:hover {
+    background-color: #e6d26b;
+}
+
+.edit-button{
+    background-color:#866336a2; /* soft pink */
+    border: none;
+    border-radius: 10px;
+    padding: 6px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+.settings-container {
+    background: transparent;  
+    border: none;            
+    box-shadow: none;       
+    padding: 0;              
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    color: #5a3e2b;
+}
+.settings-container h2 {
+    text-align: center;
+    color: #7a583a;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.settings-list {
+    list-style: none;
+    padding: 0;
+}
+
+.settings-list li {
+    padding: 8px;
+    margin: 5px 0;
+    background: #fff7ef;
+    border-radius: 8px;
+    font-size: 0.95em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e8d5c3;
+}
+
+.settings-label {
+    font-weight: bold;
+    color: #7a583a;
+}
