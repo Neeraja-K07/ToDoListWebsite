@@ -34,50 +34,33 @@ CSS
 
 Screenshots
 
-<img width="1354" height="717" alt="image" src="https://github.com/user-attachments/assets/ec475592-d8b0-470f-8455-3f72a421f0ea" />
-<img width="1358" height="719" alt="image" src="https://github.com/user-attachments/assets/f11a50b1-38bd-47b6-9c43-472e89384678" />
-<img width="1339" height="686" alt="image" src="https://github.com/user-attachments/assets/4bf6bc0e-3020-4b5d-b811-43be8ba8d557" />
-<img width="1356" height="717" alt="image" src="https://github.com/user-attachments/assets/d6db3b74-ecc8-427b-8516-024d717d182d" />
-<img width="1365" height="714" alt="image" src="https://github.com/user-attachments/assets/21e9005a-71ad-47d9-9540-d43182666489" />
-<img width="1365" height="715" alt="image" src="https://github.com/user-attachments/assets/a104114d-0466-4236-8477-17a9489b732f" />
+
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/f11a50b1-38bd-47b6-9c43-472e89384678" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/4bf6bc0e-3020-4b5d-b811-43be8ba8d557" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/d6db3b74-ecc8-427b-8516-024d717d182d" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/21e9005a-71ad-47d9-9540-d43182666489" />
+
 
 Folder Structure
 ToDoList/
 
 ├── app.py
-
 ├── database.py
-
 ├── requirements.txt
-
 ├── users.db
-
 ├── static/
-
 │   ├── authstyle.css
-
 │   ├── landingstyle.css
-
 │   ├── resetpasswordstyle.css
-
 │   ├── style.css
-
 │   └── icons/
-
 │       ├── bear.png
-
 │       ├── honey.png
-
 │       └── ToDoListIcon.jpg
-
 ├── templates/
-
 │   ├── auth.html
-
 │   ├── index.html
-
 │   ├── landing.html
-
 │   └── resetpassword.html
 
 
